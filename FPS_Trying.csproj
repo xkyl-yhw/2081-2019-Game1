@@ -221,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\EnemyAl.cs" />
+    <Compile Include="Assets\Scripts\FlatShading.cs" />
     <Compile Include="Assets\Scripts\playerColltroller.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
   </ItemGroup>
