@@ -111,7 +111,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 62f768c0259fb894c9aea42253cf7e40, type: 2}
 --- !u!1 &201415056
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &201415057
 MeshRenderer:
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 448482008}
   m_Layer: 0
   m_Name: barrier
-  m_TagString: Untagged
+  m_TagString: barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -571,6 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1984550d5410a384ea46361d69a5bd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
   bullet: {fileID: 0}
 --- !u!1 &1760300253
 GameObject:
@@ -585,6 +586,7 @@ GameObject:
   - component: {fileID: 1760300255}
   - component: {fileID: 1760300254}
   - component: {fileID: 1760300259}
+  - component: {fileID: 1760300260}
   m_Layer: 8
   m_Name: enemy
   m_TagString: enemies
@@ -686,6 +688,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPosx: 0
   playerPosy: 0
+  speed: 5
+--- !u!195 &1760300260
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1760300253}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1938181615
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +723,7 @@ GameObject:
   - component: {fileID: 1938181617}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -783,7 +807,7 @@ GameObject:
   - component: {fileID: 2063871160}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
