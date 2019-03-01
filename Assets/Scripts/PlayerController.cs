@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class PlayerController : MonoBehaviour {
 
+    private Animator Player_Animor; 
     [System.Serializable]
     public class MoveSetting
     {
@@ -33,7 +35,9 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody m_chaRig;
     private bool m_jump = false;
     public AnimationCurve SlopeCurve;
+    private int count = 0;
     void Start () {
+        Player_Animor = GameObject.Find("Anim").GetComponent<Animator>();
         player = this.GetComponent<CapsuleCollider>();
         m_chaRig = GetComponent<Rigidbody>();
         m_camera = Camera.main;
@@ -48,7 +52,10 @@ public class PlayerController : MonoBehaviour {
     float RotationX = 0f;
     public float minmouseY = -45f;
     public float maxmouseY = 45f;
+    
     void Update () {
+        Debug.Log(count);
+        
         Cursor.visible = false;
         RotationX += m_camTran.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mousespeed;
         RotationY -= Input.GetAxis("Mouse Y") * mousespeed;
@@ -59,7 +66,27 @@ public class PlayerController : MonoBehaviour {
         {
             m_jump = true;
         }
-	}
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            Player_Animor.SetBool("EndWalking", true);
+            Player_Animor.SetBool("StartWalking", false);
+            Player_Animor.SetBool("Walking", false);
+            count = 0;
+
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            if (count > 120)
+            {
+                Debug.Log("in");
+                Player_Animor.SetBool("StartWalking", false);
+                Player_Animor.SetBool("Walking", true);
+                return;
+            }
+            count++;
+            Player_Animor.SetBool("StartWalking", true);
+        }
+    }
 
     Quaternion ClampRotation(Quaternion q)
     {
@@ -88,6 +115,7 @@ public class PlayerController : MonoBehaviour {
         CalculateSpeed(input);
         if ((Mathf.Abs(input.x) > float.Epsilon || Mathf.Abs(input.y) > float.Epsilon) && m_isground)
         {
+            
             Vector3 desireMove = m_camTran.forward * input.y + m_camTran.right * input.x;
             desireMove = Vector3.ProjectOnPlane(desireMove, curGroundNormal).normalized;
             desireMove.x = desireMove.x * currentSpeed;
@@ -144,7 +172,7 @@ public class PlayerController : MonoBehaviour {
     void checkGround()
     {
         RaycastHit hit;
-        if(Physics.SphereCast(player.transform.position,player.radius,Vector3.down,out hit, ((player.height / 2 - player.radius) + 0.01f))){
+        if(Physics.SphereCast(player.transform.position,player.radius,Vector3.down,out hit, ((player.height / 2 - player.radius) + 1f))){
             curGroundNormal = hit.normal; //hit.normal 表示所碰到平面的法线 需要到时候debug一下
             m_isground = true;
         }
