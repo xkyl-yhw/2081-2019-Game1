@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/CharacterTest.unity
+- path: Assets/Scenes/Fengzhong.unity
   isLoaded: 1
   isActive: 1

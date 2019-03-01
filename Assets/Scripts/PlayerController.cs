@@ -54,9 +54,10 @@ public class PlayerController : MonoBehaviour {
     public float maxmouseY = 45f;
     
     void Update () {
+        GameObject.Find("Anim").GetComponent<Transform>().position = m_chaTran.position-new Vector3(0,player.height/2,0);
+        GameObject.Find("Anim").GetComponent<Transform>().eulerAngles = new Vector3(0, RotationX, 0);
         Debug.Log(count);
-        
-        Cursor.visible = false;
+        Cursor.visible = true;
         RotationX += m_camTran.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mousespeed;
         RotationY -= Input.GetAxis("Mouse Y") * mousespeed;
         RotationY = Mathf.Clamp(RotationY, minmouseY, maxmouseY);
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.W))
         {
+            Player_Animor.SetBool("EndWalking", false);
             if (count > 120)
             {
                 Debug.Log("in");
@@ -85,6 +87,27 @@ public class PlayerController : MonoBehaviour {
             }
             count++;
             Player_Animor.SetBool("StartWalking", true);
+        }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            Player_Animor.SetBool("EndWalkingBackWard", true);
+            Player_Animor.SetBool("StartWalkingBackWard", false);
+            Player_Animor.SetBool("WalkingBackWard", false);
+            count = 0;
+
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            Player_Animor.SetBool("EndWalkingBackWard", false);
+            if (count > 120)
+            {
+                Debug.Log("in");
+                Player_Animor.SetBool("StartWalkingBackWard", false);
+                Player_Animor.SetBool("WalkingBackWard", true);
+                return;
+            }
+            count++;
+            Player_Animor.SetBool("StartWalkingBackWard", true);
         }
     }
 
