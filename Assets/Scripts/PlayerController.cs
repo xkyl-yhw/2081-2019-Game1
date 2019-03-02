@@ -67,6 +67,14 @@ public class PlayerController : MonoBehaviour {
         {
             m_jump = true;
         }
+        if (Input.GetMouseButton(1))
+        {
+            Player_Animor.SetBool("Aimming", true);
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            Player_Animor.SetBool("Aimming", false);
+        }
         if (Input.GetKeyUp(KeyCode.W))
         {
             Player_Animor.SetBool("EndWalking", true);
@@ -109,6 +117,7 @@ public class PlayerController : MonoBehaviour {
             count++;
             Player_Animor.SetBool("StartWalkingBackWard", true);
         }
+        
     }
 
     Quaternion ClampRotation(Quaternion q)
